@@ -1,0 +1,16 @@
+export const AdminEndpoints = {
+  ADMIN_LOGIN: "admin/login",
+  GET_BLOGS: "admin/blogs",
+  ADD_BLOG: "admin/blog",
+  DELETE_BLOG: "admin/blog",
+  CREATE_ADMIN: "admin/register",
+  RESET_PASSWORD: "admin/request-password-update",
+  UPDATE_PASSWORD: "admin/update-password",
+  ADD_PAGE: "admin/web-settings",
+  UPDATE_PAGE: "admin/web-settings",
+  GET_PAGES: "admin/web-settings",
+  DELETE_PAGES: "admin/delete-page",
+  UPLOAD_IMAGE: "admin/upload-media",
+  GET_IMAGE: "admin/image-list",
+  DELETE_IMAGE: "admin/delete-media",
+};
