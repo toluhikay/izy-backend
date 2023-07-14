@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { createPortal } from "react-dom";
-import { useNavigate } from "react-router-dom";
 import NewBlogModal from "../../../modals/NewBlogModal";
 import { IzyAdminApis } from "../../../api/Query";
 import PaginationComponent from "../../../components/PaginationComponent";

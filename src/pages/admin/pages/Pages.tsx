@@ -14,6 +14,7 @@ import AircraftPurchase from "./subPages/AircraftPurchase";
 import AircraftManagement from "./subPages/AircraftManagement";
 import AircraftImportation from "./subPages/AircraftImportation";
 import Careers from "./subPages/Careers";
+import Privacy from "./subPages/Privacy";
 
 const Pages = () => {
   const navigate = useNavigate();
@@ -44,6 +45,7 @@ const Pages = () => {
     { id: 1, page: "aircraft management", link: "aircraft-management" },
     { id: 1, page: "aircraft importation", link: "aircraft-importation" },
     { id: 1, page: "careers", link: "careers" },
+    { id: 1, page: "privacy", link: "privacy" },
   ];
 
   return (
@@ -52,9 +54,9 @@ const Pages = () => {
         <h2 className="text-[28px] font-medium mb-2">Pages</h2>
         <div className="flex justify-between mb-8 items-center w-full">
           <p className="text-natural-1">Manage Contents on these pages </p>
-          <button className="bg-primary-1 text-white rounded-[4px] py-[10px] px-4" onClick={HandleCreatePage}>
+          {/* <button className="bg-primary-1 text-white rounded-[4px] py-[10px] px-4" onClick={HandleCreatePage}>
             NEW PAGE +
-          </button>
+          </button> */}
         </div>
         <div className="flex items-center border-b border-primary-1 pb-3 justify-between">
           {PagesData.map((item, index) => {
@@ -77,6 +79,7 @@ const Pages = () => {
             <Route path="aircraft-management" element={<AircraftManagement />} />
             <Route path="aircraft-importation" element={<AircraftImportation />} />
             <Route path="careers" element={<Careers />} />
+            <Route path="privacy" element={<Privacy />} />
           </Routes>
         </div>
       </div>

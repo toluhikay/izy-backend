@@ -6,15 +6,14 @@ import ButtonLoader from "../../../../common/ButtonLoader";
 
 const defaultFormFields = {
   title: "",
-  background_url: "",
-  aircaft_importation_content: "",
+  content: "",
 };
 
-const AircraftImportation = () => {
+const Privacy = () => {
   const getImages = IzyAdminApis.useGetImagesListQuery({});
   const ImageList = getImages?.data?.data;
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { title, background_url, aircaft_importation_content } = formFields;
+  const { title } = formFields;
 
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -23,12 +22,12 @@ const AircraftImportation = () => {
   const getPages = IzyAdminApis.useGetPagesQuery(params);
   const [updatePageMutation, updatePageMutationResults] = IzyAdminApis.useUpdatePageMutation();
 
-  const AircraftImportation = getPages?.data?.data?.page_data[3];
-  const params2 = AircraftImportation?.id;
+  const Privacy = getPages?.data?.data?.page_data[0];
+  const params2 = Privacy?.id;
 
   const [value, setValue] = useState("");
 
-  console.log("management id", params2);
+  console.log("career", params2);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -42,10 +41,9 @@ const AircraftImportation = () => {
         params: { id: params2 },
         body: {
           meta: {
-            aircraft_importation: {
+            privacy: {
               title: title,
-              background_url: background_url,
-              aircaft_importation_content: value,
+              content: value,
             },
           },
         },
@@ -55,8 +53,7 @@ const AircraftImportation = () => {
 
   const FormData = [
     { id: 1, props: "title", value: title, label: "title", quill: false },
-    { id: 2, props: "background_url", value: background_url, label: "hero background", quill: false, img: true },
-    { id: 2, props: "aircaft_importation_content", value: value, label: "aircraft importation content", quill: true, setState: setValue },
+    { id: 2, props: "content", value: value, label: "privacy content", quill: true, setState: setValue, img: false },
   ];
 
   return (
@@ -112,4 +109,4 @@ const AircraftImportation = () => {
   );
 };
 
-export default AircraftImportation;
+export default Privacy;
