@@ -14,18 +14,18 @@ const DashboardNav = () => {
     { id: 6, name: "pages", link: "pages", icon: <PagesIcon /> },
     { id: 6, name: "blogs", link: "blogs", icon: <PagesIcon /> },
     { id: 6, name: "media", link: "media", icon: <PagesIcon /> },
-    { id: 9, name: "notification", link: "notification", icon: <NotificationIcon /> },
+    { id: 9, name: "subscribers", link: "subscribers-news", icon: <NotificationIcon /> },
     { id: 10, name: "account setting", link: "account-setting", icon: <SettingsIcon /> },
   ];
 
   return (
     <div className="sticky flex border-r border-natural-2 flex-col justify-between items-start w-[288px] py-8 px-6 top-0 h-screen bg-white">
       <div className="mb-8 h-[90%]">
-        <img className="w-20 h-10" src={Logo} alt="" />
-        <div className=" border border-natural-2 bg-white rounded-[4px] mt-6 mb-3 flex items-center justify-between py-[11px] px-[13px]">
+        <img className="w-20 h-10 mb-8" src={Logo} alt="" />
+        {/* <div className=" border border-natural-2 bg-white rounded-[4px] mt-6 mb-3 flex items-center justify-between py-[11px] px-[13px]">
           <FiSearch />
           <input className="text outline-none text-xs ml-2" type="text" placeholder="Search" />
-        </div>
+        </div> */}
         <div className="h-[90%] flex flex-col justify-start">
           {NavRoutesData.map((item, index) => {
             return (
@@ -42,10 +42,10 @@ const DashboardNav = () => {
 
       <div className="flex items-center w-full border-t pt-4 border-[#D3CED0] justify-between">
         <div className="flex items-center relative">
-          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60" className="w-[40px] h-[40px] rounded-full object-cover" alt="" />
+          {/* <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60" className="w-[40px] h-[40px] rounded-full object-cover" alt="" /> */}
           <div className="ml-3">
-            <p className="font-medium">Stephen J.</p>
-            <p className="text-natural-1">Stephen@gmail.com</p>
+            <p className="font-medium">Admin</p>
+            <p className="text-natural-1">Log Out</p>
           </div>
         </div>
         <div className=" cursor-pointer" onClick={() => dispatch(logOutAdmin())}>

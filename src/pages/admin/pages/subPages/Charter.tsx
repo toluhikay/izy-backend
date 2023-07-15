@@ -24,10 +24,10 @@ const Charter = () => {
   const getPages = IzyAdminApis.useGetPagesQuery(params);
   const [updatePageMutation, updatePageMutationResults] = IzyAdminApis.useUpdatePageMutation();
 
-  const Charter = getPages?.data?.data?.page_data[3];
+  const Charter = getPages?.data?.data?.page_data[5];
   const params2 = Charter?.id;
 
-  console.log("vharter id", params2);
+  // console.log("vharter id", params2);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;

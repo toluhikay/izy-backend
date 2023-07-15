@@ -19,7 +19,7 @@ const NewBlogModal = ({ setBlogOpen }: { setBlogOpen: React.Dispatch<React.SetSt
               <div
                 className="h-[150px] border cursor-pointer rounded border-primary-1 p-1 lg:w-[24%] md:w-[48%] w-full mb-6"
                 key={index}
-                onClick={() => {
+                onClick={(e) => {
                   setSrc(item.secure_url);
                   console.log(item.secure_url);
                 }}
@@ -68,10 +68,10 @@ const NewBlogModal = ({ setBlogOpen }: { setBlogOpen: React.Dispatch<React.SetSt
   const HandleCreateBlog = async (e: any) => {
     e.preventDefault();
     try {
-      const data = new FormData();
-      const params = { title: value, content: value2 };
-      data.append("media", src);
-      const result = await postBlogMutation({ params, data }).unwrap();
+      // const data = new FormData();
+      const body = { title: value, content: value2, media: src };
+      // data.append("media", src);
+      const result = await postBlogMutation({ title: value, content: value2, media: src }).unwrap();
       console.log(result);
     } catch (error) {}
   };

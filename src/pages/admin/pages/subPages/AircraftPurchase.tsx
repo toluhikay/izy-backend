@@ -37,10 +37,10 @@ const AircraftPurchase = () => {
   const getPages = IzyAdminApis.useGetPagesQuery(params);
   const [updatePageMutation, updatePageMutationResults] = IzyAdminApis.useUpdatePageMutation();
 
-  const AircraftPurchase = getPages?.data?.data?.page_data[2];
+  const AircraftPurchase = getPages?.data?.data?.page_data[4];
   const params2 = AircraftPurchase?.id;
 
-  console.log("purchase id", params2);
+  // console.log("purchase id", params2);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;

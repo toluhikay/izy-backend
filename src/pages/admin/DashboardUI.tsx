@@ -4,6 +4,9 @@ import { Route, Routes } from "react-router-dom";
 import Pages from "./pages/Pages";
 import Blogs from "./blogs/Blogs";
 import Media from "../media/Media";
+import DashboardLanding from "./pages/subPages/DashboardLanding";
+import AccountSetting from "./accountSetting/AccountSetting";
+import Subscribers from "./subscribers/Subscribers";
 
 const DashboardUI = () => {
   return (
@@ -11,10 +14,12 @@ const DashboardUI = () => {
       <DashboardNav />
       <div className=" w-[calc(100vw-228px)] relative flex">
         <Routes>
-          <Route index element />
+          <Route index element={<DashboardLanding />} />
           <Route path="pages/*" element={<Pages />} />
           <Route path="blogs" element={<Blogs />} />
           <Route path="media" element={<Media />} />
+          <Route path="subscribers-news" element={<Subscribers />} />
+          <Route path="account-setting" element={<AccountSetting />} />
         </Routes>
       </div>
     </div>

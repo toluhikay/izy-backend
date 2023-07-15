@@ -13,4 +13,5 @@ export const AdminEndpoints = {
   UPLOAD_IMAGE: "admin/upload-media",
   GET_IMAGE: "admin/image-list",
   DELETE_IMAGE: "admin/delete-media",
+  SUBSCRIBERS: "admin/subscription",
 };

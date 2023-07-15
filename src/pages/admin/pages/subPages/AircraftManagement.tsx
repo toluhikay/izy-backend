@@ -33,7 +33,7 @@ const AircraftManagement = () => {
   const AircraftManagement = getPages?.data?.data?.page_data[1];
   const params2 = AircraftManagement?.id;
 
-  console.log("management id", params2);
+  // console.log("management id", params2);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;

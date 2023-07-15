@@ -42,13 +42,20 @@ export const IzyAdminApis = createApi({
         body,
       }),
     }),
+    adminUpdatePassword: builder.mutation({
+      query: (body) => ({
+        url: AdminEndpoints.UPDATE_PASSWORD,
+        body,
+        method: "PUT",
+      }),
+    }),
 
     // blogs endpoints
     postBlog: builder.mutation<string, any>({
-      query: ({ data, params }) => ({
+      query: (body) => ({
         url: `${AdminEndpoints.ADD_BLOG}`,
-        params,
-        body: data,
+        // params
+        body,
         method: "POST",
       }),
       invalidatesTags: ["Blog"],
@@ -128,6 +135,14 @@ export const IzyAdminApis = createApi({
         method: "DELETE",
       }),
       invalidatesTags: ["Pages"],
+    }),
+
+    // news letter subscribers
+    getSubscribers: builder.query<any, any>({
+      query: () => ({
+        url: AdminEndpoints.SUBSCRIBERS,
+        method: "GET",
+      }),
     }),
   }),
 });

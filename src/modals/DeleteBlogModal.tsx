@@ -13,7 +13,9 @@ const DeleteBlogModal = ({ modalOpen, setModalOpen, id }: { modalOpen: boolean; 
 
     try {
       const result = await deleteBlogMutation(params);
-      console.log(result);
+      setTimeout(() => {
+        setModalOpen(false);
+      }, 500);
     } catch (error) {}
   };
 

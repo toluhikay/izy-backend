@@ -27,7 +27,7 @@ const Privacy = () => {
 
   const [value, setValue] = useState("");
 
-  console.log("career", params2);
+  console.log("privacy", params2);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;

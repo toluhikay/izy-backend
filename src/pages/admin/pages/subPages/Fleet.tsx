@@ -42,8 +42,10 @@ const OurCompany = () => {
   const getPages = IzyAdminApis.useGetPagesQuery(params);
   const [updatePageMutation, updatePageMutationResults] = IzyAdminApis.useUpdatePageMutation();
 
-  const Fleet = getPages?.data?.data?.page_data[4];
+  const Fleet = getPages?.data?.data?.page_data[6];
   const params2 = Fleet?.id;
+
+  // console.log("fleet id", params2);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
