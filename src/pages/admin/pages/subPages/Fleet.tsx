@@ -45,8 +45,6 @@ const OurCompany = () => {
   const Fleet = getPages?.data?.data?.page_data[6];
   const params2 = Fleet?.id;
 
-  // console.log("fleet id", params2);
-
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormFields({ ...formFields, [name]: value });

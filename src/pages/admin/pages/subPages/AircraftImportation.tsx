@@ -28,8 +28,6 @@ const AircraftImportation = () => {
 
   const [value, setValue] = useState("");
 
-  console.log("importation id", params2);
-
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormFields({ ...formFields, [name]: value });

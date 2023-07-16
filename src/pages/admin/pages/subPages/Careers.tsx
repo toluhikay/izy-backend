@@ -29,13 +29,9 @@ const Careers = () => {
   const Career = getPages?.data?.data?.page_data[2];
   const params2 = Career?.id;
 
-  console.log("careers id", params2);
-
   const [value, setValue] = useState("");
   const [value2, setValue2] = useState("");
   const [value3, setValue3] = useState("");
-
-  console.log("career", params2);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;

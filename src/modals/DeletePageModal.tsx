@@ -3,6 +3,7 @@ import ModalWrapper from "../common/ModalWrapper";
 import ModalCancelButton from "../common/ModalCancelButton";
 import { IzyAdminApis } from "../api/Query";
 import ButtonLoader from "../common/ButtonLoader";
+import { toast } from "react-hot-toast";
 
 const DeletePageModal = ({ modalOpen, setModalOpen, id }: { modalOpen: boolean; setModalOpen: React.Dispatch<React.SetStateAction<boolean>>; id: string }) => {
   const params = { id: id };
@@ -13,7 +14,10 @@ const DeletePageModal = ({ modalOpen, setModalOpen, id }: { modalOpen: boolean; 
 
     try {
       const result = await deleteBlogMutation(params);
-      console.log(result);
+      toast.success("Blog deleted successfully");
+      setTimeout(() => {
+        setModalOpen(false);
+      }, 1000);
     } catch (error) {}
   };
 

@@ -5,7 +5,6 @@ import { GrFormNext } from "react-icons/gr";
 const PaginationComponent = ({ totalPages, currentPage, setCurrentPage }: { totalPages: number; currentPage: number; setCurrentPage: React.Dispatch<React.SetStateAction<number>> }) => {
   const HandlePageChange = (data: any) => {
     setCurrentPage(data?.selected + 1);
-    console.log("selected number", data.selected);
   };
 
   return (

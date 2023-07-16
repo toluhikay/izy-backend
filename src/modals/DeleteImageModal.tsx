@@ -3,6 +3,7 @@ import ModalWrapper from "../common/ModalWrapper";
 import ModalCancelButton from "../common/ModalCancelButton";
 import { IzyAdminApis } from "../api/Query";
 import ButtonLoader from "../common/ButtonLoader";
+import { toast } from "react-hot-toast";
 
 const DeleteImageModal = ({ modalOpen, setModalOpen, id }: { modalOpen: boolean; setModalOpen: React.Dispatch<React.SetStateAction<boolean>>; id: string }) => {
   const params = { public_id: id };
@@ -13,7 +14,10 @@ const DeleteImageModal = ({ modalOpen, setModalOpen, id }: { modalOpen: boolean;
 
     try {
       const result = await deleteImageMutation(params);
-      console.log(result);
+      toast.success("Deleted Successfully");
+      setTimeout(() => {
+        setModalOpen(false);
+      }, 1000);
     } catch (error) {}
   };
 

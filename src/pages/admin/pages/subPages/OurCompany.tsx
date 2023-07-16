@@ -37,8 +37,6 @@ const OurCompany = () => {
   const OurCompanyDetails = getPages?.data?.data?.page_data[7];
   const params2 = OurCompanyDetails?.id;
 
-  // console.log("params is our company", params2);
-
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormFields({ ...formFields, [name]: value });

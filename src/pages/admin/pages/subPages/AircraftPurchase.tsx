@@ -40,8 +40,6 @@ const AircraftPurchase = () => {
   const AircraftPurchase = getPages?.data?.data?.page_data[4];
   const params2 = AircraftPurchase?.id;
 
-  // console.log("purchase id", params2);
-
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormFields({ ...formFields, [name]: value });

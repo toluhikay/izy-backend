@@ -7,8 +7,6 @@ const Subscribers = () => {
 
   const subscribersList = getSubscribers?.data?.subscription?.page_data;
 
-  console.log("subscribers", subscribersList);
-
   return (
     <div className="p-8 w-full">
       <h2 className="text-[28px] font-medium mb-2">News Letter Subscribers</h2>

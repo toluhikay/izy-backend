@@ -4,6 +4,7 @@ import UploadMedia from "../../modals/UploadMedia";
 import { portals } from "../admin/blogs/Blogs";
 import { IzyAdminApis } from "../../api/Query";
 import DeleteImageModal from "../../modals/DeleteImageModal";
+import LoaderComponent from "../../common/LoaderComponent";
 
 const Media = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -12,7 +13,6 @@ const Media = () => {
   const getImages = IzyAdminApis.useGetImagesListQuery({});
 
   const ImageList = getImages?.data?.data;
-  console.log(ImageList);
 
   return (
     <div className="w-full">
@@ -25,26 +25,30 @@ const Media = () => {
           </button>
         </div>
       </div>
-      <div className="px-[32px] py-20 flex justify-between flex-wrap items-center">
-        {ImageList?.map((item: any, index: number) => {
-          return (
-            <div className="h-[230px] border-2 rounded border-primary-1 p-2 lg:w-[24%] md:w-[48%] w-full mb-6" key={index}>
-              <img className="h-[80%] w-full object-fill" src={item.secure_url} alt="" />
-              <div className="w-full flex justify-center items-center">
-                <button
-                  className="bg-red-600 text-white uppercase font-medium w-full rounded py-1 mt-3"
-                  onClick={() => {
-                    setDeleteOpen(true);
-                    setId(item.public_id);
-                  }}
-                >
-                  Delete Image
-                </button>
+      {getImages.isLoading ? (
+        <LoaderComponent />
+      ) : (
+        <div className="px-[32px] py-20 flex justify-between flex-wrap items-center">
+          {ImageList?.map((item: any, index: number) => {
+            return (
+              <div className="h-[230px] border-2 rounded border-primary-1 p-2 lg:w-[24%] md:w-[48%] w-full mb-6" key={index}>
+                <img className="h-[80%] w-full object-fill" src={item.secure_url} alt="" />
+                <div className="w-full flex justify-center items-center">
+                  <button
+                    className="bg-red-600 text-white uppercase font-medium w-full rounded py-1 mt-3"
+                    onClick={() => {
+                      setDeleteOpen(true);
+                      setId(item.public_id);
+                    }}
+                  >
+                    Delete Image
+                  </button>
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
 
       {modalOpen && createPortal(<UploadMedia setModalOpen={setModalOpen} />, portals)}
       {deleteOpen && createPortal(<DeleteImageModal id={id} modalOpen={deleteOpen} setModalOpen={setDeleteOpen} />, portals)}

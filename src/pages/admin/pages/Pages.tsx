@@ -28,7 +28,6 @@ const Pages = () => {
   const [addPage, addPageResults] = IzyAdminApis.useAddPageMutation();
 
   const pagesList = getPages?.data?.data?.page_data;
-  // console.log("pages", pagesList);
 
   const HandleCreatePage = async (e: any) => {
     e.preventDefault();

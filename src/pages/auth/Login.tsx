@@ -15,7 +15,6 @@ import useAuthToken from "../../hooks/useAuthToken";
 const Login = () => {
   const [loginMutation, loginMutationResults] = IzyAdminApis.useAdminLoginMutation();
   const token = useAuthToken();
-  console.log("token", token);
 
   const navigate = useNavigate();
   const formik = useFormik({
@@ -30,7 +29,6 @@ const Login = () => {
     onSubmit: async (values) => {
       try {
         const result = await loginMutation(values).unwrap();
-        console.log(result);
       } catch (error: any) {
         toast.error(error?.data?.message);
       }
@@ -61,9 +59,9 @@ const Login = () => {
                 </div>
               );
             })}
-            <p className="py-3 flex justify-end text-primary-1 cursor-pointer" onClick={() => navigate("/reset-password")}>
+            {/* <p className="py-3 flex justify-end text-primary-1 cursor-pointer" onClick={() => navigate("/reset-password")}>
               Reset Password
-            </p>
+            </p> */}
           </div>
           <GeneralButton loaderComponent={<ButtonLoader />} loading={loginMutationResults.isLoading} text="Sign In" />
         </form>

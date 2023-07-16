@@ -3,6 +3,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { IzyAdminApis } from "../api/Query";
 import ButtonLoader from "../common/ButtonLoader";
+import { toast } from "react-hot-toast";
 
 const NewBlogModal = ({ setBlogOpen }: { setBlogOpen: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const getImages = IzyAdminApis.useGetImagesListQuery({});
@@ -21,7 +22,6 @@ const NewBlogModal = ({ setBlogOpen }: { setBlogOpen: React.Dispatch<React.SetSt
                 key={index}
                 onClick={(e) => {
                   setSrc(item.secure_url);
-                  console.log(item.secure_url);
                 }}
               >
                 <img className="h-[100%] w-full object-fill" src={item.secure_url} alt="" />
@@ -72,7 +72,10 @@ const NewBlogModal = ({ setBlogOpen }: { setBlogOpen: React.Dispatch<React.SetSt
       const body = { title: value, content: value2, media: src };
       // data.append("media", src);
       const result = await postBlogMutation({ title: value, content: value2, media: src }).unwrap();
-      console.log(result);
+      toast.success("Blog Created SuccessFully");
+      setTimeout(() => {
+        setBlogOpen(false);
+      }, 500);
     } catch (error) {}
   };
 
