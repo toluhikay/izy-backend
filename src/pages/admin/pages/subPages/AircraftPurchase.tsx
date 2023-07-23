@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IzyAdminApis } from "../../../../api/Query";
 import ReactQuill from "react-quill";
 import { modules } from "../../../../constants/pageDummyData";
 import ButtonLoader from "../../../../common/ButtonLoader";
+import { toast } from "react-hot-toast";
 
 const defaultFormFields = {
   title: "",
@@ -30,6 +31,11 @@ const AircraftPurchase = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { title, background_url, content, content2, sales_team_contact, sub_title, image, sub_content, sub_title2, image2, sub_content2, sub_title3, image3, sub_content3, sub_title4, image4, sub_content4 } = formFields;
 
+  // quill states
+  const [value, setValue] = useState("");
+  const [value2, setValue2] = useState("");
+  const [value3, setValue3] = useState("");
+
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
 
@@ -37,8 +43,34 @@ const AircraftPurchase = () => {
   const getPages = IzyAdminApis.useGetPagesQuery(params);
   const [updatePageMutation, updatePageMutationResults] = IzyAdminApis.useUpdatePageMutation();
 
-  const AircraftPurchase = getPages?.data?.data?.page_data[4];
-  const params2 = AircraftPurchase?.id;
+  const AircraftSales = getPages?.data?.data?.page_data[4];
+  const AirSalesData = AircraftSales?.meta?.aircraft_sales;
+
+  useEffect(() => {
+    setFormFields({
+      ...formFields,
+      title: AirSalesData?.title || "",
+      background_url: AirSalesData?.background_url || "",
+      sub_title: AirSalesData?.sub_data?.[0]?.sub_title || "",
+      image: AirSalesData?.sub_data?.[0]?.image || "",
+      sub_content: AirSalesData?.sub_data?.[0]?.sub_content || "",
+      sub_title2: AirSalesData?.sub_data?.[1]?.sub_title || "",
+      image2: AirSalesData?.sub_data?.[1]?.image || "",
+      sub_content2: AirSalesData?.sub_data?.[1]?.sub_content || "",
+      sub_title3: AirSalesData?.sub_data?.[2]?.sub_title || "",
+      image3: AirSalesData?.sub_data?.[2]?.image || "",
+      sub_content3: AirSalesData?.sub_data?.[2]?.sub_content || "",
+      sub_title4: AirSalesData?.sub_data?.[3]?.sub_title || "",
+      image4: AirSalesData?.sub_data?.[3]?.image || "",
+      sub_content4: AirSalesData?.sub_data?.[3]?.sub_content || "",
+    });
+    setValue(AirSalesData?.content || "");
+    setValue2(AirSalesData?.content2 || "");
+    setValue3(AirSalesData?.sales_team_contact || "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [AirSalesData]);
+
+  const params2 = AircraftSales?.id;
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -52,12 +84,12 @@ const AircraftPurchase = () => {
         params: { id: params2 },
         body: {
           meta: {
-            aircraft_purchase: {
+            aircraft_sales: {
               title: title,
               background_url: background_url,
-              content: content,
-              content2: content2,
-              sales_team_contact: sales_team_contact,
+              content: value,
+              content2: value2,
+              sales_team_contact: value3,
               sub_data: [
                 { sub_title: sub_title, image: image, sub_content: sub_content },
                 { sub_title: sub_title2, image: image2, sub_content: sub_content2 },
@@ -68,15 +100,16 @@ const AircraftPurchase = () => {
           },
         },
       });
+      toast.success("Aircraft Sales Pages Updated Successfully");
     } catch (error) {}
   };
 
   const FormData = [
     { id: 1, props: "title", value: title, label: "title", quill: false },
     { id: 2, props: "background_url", value: background_url, label: "hero background", quill: false, img: true },
-    { id: 2, props: "content", value: content, label: "aircraft sales content", quill: false },
-    { id: 2, props: "content2", value: content2, label: "aircraft sales content 2", quill: false },
-    { id: 3, props: "sales_team_contact", value: sales_team_contact, label: "Sales Contact Team", quill: true },
+    { id: 2, props: "content", value: value, label: "aircraft sales content", quill: true, setState: setValue },
+    { id: 2, props: "content2", value: value2, label: "aircraft sales content 2", quill: true, setState: setValue2 },
+    { id: 3, props: "sales_team_contact", value: value3, label: "Sales Contact Team", quill: true, setState: setValue3 },
     { id: 4, props: "sub_title", value: sub_title, label: "sub title travel needs", quill: false },
     { id: 4, props: "sub_content", value: sub_content, label: "sub content travel needs", quill: false },
     { id: 4, props: "image", value: image, label: "image travel needs", quill: false, img: true },
@@ -105,10 +138,10 @@ const AircraftPurchase = () => {
                 </label>
                 <div>
                   {item.quill ? (
-                    <ReactQuill modules={modules} className="mt-3" value={item.value} />
+                    <ReactQuill modules={modules} className="mt-3" value={item.value} onChange={item.setState} />
                   ) : item.img ? (
                     <div>
-                      <input className="border w-full p-2 mt-3" type="text" value={item.value} name={item.props} id={item.props} onChange={handleChange} />
+                      <textarea className="border w-full p-2 mt-3" rows={3} value={item.value} name={item.props} id={item.props} onChange={handleChange} />
                       <div className="flex py-3 flex-wrap items-center">
                         {ImageList?.map((itemImg: any, indexImg: number) => {
                           return (
@@ -127,7 +160,7 @@ const AircraftPurchase = () => {
                       </div>
                     </div>
                   ) : (
-                    <input className="border w-full p-2 mt-3" type="text" value={item.value} name={item.props} id={item.props} onChange={handleChange} />
+                    <textarea className="border w-full p-2 mt-3" rows={3} value={item.value} name={item.props} id={item.props} onChange={handleChange} />
                   )}
                 </div>
               </div>

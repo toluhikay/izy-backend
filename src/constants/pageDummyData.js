@@ -1,3 +1,9 @@
+import Quill from "quill";
+window.Quill = Quill;
+
+const ImageResize = require("quill-image-resize-module").default;
+Quill.register("modules/imageResize", ImageResize);
+
 export const pageDummyData = {
   meta: {
     privacy_policy: {
@@ -27,5 +33,9 @@ export var toolbarOptions = [
 ];
 
 export const modules = {
+  imageResize: {
+    parchment: Quill.import("parchment"),
+    modules: ["Resize", "DisplaySize"],
+  },
   toolbar: toolbarOptions,
 };

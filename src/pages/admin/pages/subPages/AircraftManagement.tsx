@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IzyAdminApis } from "../../../../api/Query";
 import ReactQuill from "react-quill";
 import { modules } from "../../../../constants/pageDummyData";
 import ButtonLoader from "../../../../common/ButtonLoader";
+import { toast } from "react-hot-toast";
 
 const defaultFormFields = {
   title: "",
@@ -33,6 +34,18 @@ const AircraftManagement = () => {
   const AircraftManagement = getPages?.data?.data?.page_data[1];
   const params2 = AircraftManagement?.id;
 
+  const AircraftData = AircraftManagement?.meta?.aircraft_management;
+
+  // console.log("data", AircraftData);
+
+  useEffect(() => {
+    setFormFields({ ...formFields, title: AircraftData?.title || "", background_url: AircraftData?.background_url || "", aircaft_management_content: AircraftData?.aircaft_management_content || "", aircaft_management_content2: AircraftData?.aircaft_management_content2 || "", aircraft_maintenance_content: AircraftData?.aircraft_maintenance_content || "" });
+
+    setValue(AircraftData?.line_maintenance_content || "");
+    setValue2(AircraftData?.base_maintenance_content || "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [AircraftManagement]);
+
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormFields({ ...formFields, [name]: value });
@@ -57,6 +70,7 @@ const AircraftManagement = () => {
           },
         },
       });
+      toast.success("Aircraft Manangement Updated Successfully");
     } catch (error) {}
   };
 
@@ -77,7 +91,7 @@ const AircraftManagement = () => {
           {FormData.map((item, index) => {
             return (
               <div key={index}>
-                <label className="font-medium text-primary-1 capitalize" htmlFor={item.props}>
+                <label className="font-bold text-xl text-primary-1 capitalize" htmlFor={item.props}>
                   {" "}
                   <br />
                   {item.label}
@@ -87,7 +101,7 @@ const AircraftManagement = () => {
                     <ReactQuill modules={modules} className="mt-3" value={item.value} onChange={item.setState} />
                   ) : item.img ? (
                     <div>
-                      <input className="border w-full p-2 mt-3" type="text" value={item.value} name={item.props} id={item.props} onChange={handleChange} />
+                      <textarea className="border w-full p-2 mt-3" value={item.value} name={item.props} id={item.props} onChange={handleChange} />
                       <div className="flex py-3 flex-wrap items-center">
                         {ImageList?.map((itemImg: any, indexImg: number) => {
                           return (
@@ -106,7 +120,7 @@ const AircraftManagement = () => {
                       </div>
                     </div>
                   ) : (
-                    <input className="border w-full p-2 mt-3" type="text" value={item.value} name={item.props} id={item.props} onChange={handleChange} />
+                    <textarea className="border w-full p-2 mt-3" value={item.value} name={item.props} id={item.props} onChange={handleChange} />
                   )}
                 </div>
               </div>

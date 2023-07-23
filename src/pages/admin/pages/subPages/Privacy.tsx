@@ -3,6 +3,7 @@ import { IzyAdminApis } from "../../../../api/Query";
 import ReactQuill from "react-quill";
 import { modules } from "../../../../constants/pageDummyData";
 import ButtonLoader from "../../../../common/ButtonLoader";
+import { toast } from "react-hot-toast";
 
 const defaultFormFields = {
   title: "",
@@ -46,6 +47,7 @@ const Privacy = () => {
           },
         },
       });
+      toast.success("Privacy Content Uploaded Successfully");
     } catch (error) {}
   };
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IzyAdminApis } from "../../../../api/Query";
 import ReactQuill from "react-quill";
 import { modules } from "../../../../constants/pageDummyData";
@@ -25,6 +25,14 @@ const Charter = () => {
   const [updatePageMutation, updatePageMutationResults] = IzyAdminApis.useUpdatePageMutation();
 
   const Charter = getPages?.data?.data?.page_data[5];
+  const CharterData = Charter?.meta?.charter;
+
+  useEffect(() => {
+    setFormFields({ ...formFields, title: CharterData?.title || "", background_url: CharterData?.background_url || "" });
+    setValue(CharterData?.content);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [CharterData]);
+
   const params2 = Charter?.id;
 
   const handleChange = (e: any) => {

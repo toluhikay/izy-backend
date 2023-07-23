@@ -40,9 +40,9 @@ const Pages = () => {
     { id: 1, page: "Our Company", link: "our-company" },
     { id: 1, page: "Fleet", link: "fleet" },
     { id: 1, page: "Charter", link: "charter" },
-    { id: 1, page: "aircraft purchase", link: "aircraft-purchase" },
+    { id: 1, page: "aircraft sales", link: "aircraft-sales" },
     { id: 1, page: "aircraft management", link: "aircraft-management" },
-    { id: 1, page: "aircraft importation", link: "aircraft-importation" },
+    { id: 1, page: "aircraft ambulance", link: "aircraft-ambulance" },
     { id: 1, page: "careers", link: "careers" },
     { id: 1, page: "privacy", link: "privacy" },
   ];
@@ -74,9 +74,9 @@ const Pages = () => {
             <Route path="our-company" element={<OurCompany />} />
             <Route path="fleet" element={<Fleet />} />
             <Route path="charter" element={<Charter />} />
-            <Route path="aircraft-purchase" element={<AircraftPurchase />} />
+            <Route path="aircraft-sales" element={<AircraftPurchase />} />
             <Route path="aircraft-management" element={<AircraftManagement />} />
-            <Route path="aircraft-importation" element={<AircraftImportation />} />
+            <Route path="aircraft-ambulance" element={<AircraftImportation />} />
             <Route path="careers" element={<Careers />} />
             <Route path="privacy" element={<Privacy />} />
           </Routes>

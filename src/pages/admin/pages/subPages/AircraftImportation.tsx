@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IzyAdminApis } from "../../../../api/Query";
 import ReactQuill from "react-quill";
 import { modules } from "../../../../constants/pageDummyData";
 import ButtonLoader from "../../../../common/ButtonLoader";
+import { toast } from "react-hot-toast";
 
 const defaultFormFields = {
   title: "",
@@ -23,8 +24,15 @@ const AircraftImportation = () => {
   const getPages = IzyAdminApis.useGetPagesQuery(params);
   const [updatePageMutation, updatePageMutationResults] = IzyAdminApis.useUpdatePageMutation();
 
-  const AircraftImportation = getPages?.data?.data?.page_data[3];
-  const params2 = AircraftImportation?.id;
+  const AircraftAmbulance = getPages?.data?.data?.page_data[3];
+  const params2 = AircraftAmbulance?.id;
+  const AmbulanceData = AircraftAmbulance?.meta?.aircraft_ambulance;
+
+  useEffect(() => {
+    setFormFields({ ...formFields, title: AmbulanceData?.title || "", background_url: AmbulanceData?.background_url || "" });
+    setValue(AmbulanceData?.aircaft_ambulance_content || "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [AircraftAmbulance]);
 
   const [value, setValue] = useState("");
 
@@ -40,21 +48,22 @@ const AircraftImportation = () => {
         params: { id: params2 },
         body: {
           meta: {
-            aircraft_importation: {
+            aircraft_ambulance: {
               title: title,
               background_url: background_url,
-              aircaft_importation_content: value,
+              aircaft_ambulance_content: value,
             },
           },
         },
       });
+      toast.success("Air Ambulance Page Updated Successfully");
     } catch (error) {}
   };
 
   const FormData = [
     { id: 1, props: "title", value: title, label: "title", quill: false },
     { id: 2, props: "background_url", value: background_url, label: "hero background", quill: false, img: true },
-    { id: 2, props: "aircaft_importation_content", value: value, label: "aircraft importation content", quill: true, setState: setValue },
+    { id: 2, props: "aircaft_importation_content", value: value, label: "aircraft ambulance content", quill: true, setState: setValue },
   ];
 
   return (

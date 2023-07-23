@@ -59,9 +59,7 @@ const Login = () => {
                 </div>
               );
             })}
-            {/* <p className="py-3 flex justify-end text-primary-1 cursor-pointer" onClick={() => navigate("/reset-password")}>
-              Reset Password
-            </p> */}
+            <p className="py-3 flex justify-end text-primary-1 cursor-pointer">{/* Reset Password */}</p>
           </div>
           <GeneralButton loaderComponent={<ButtonLoader />} loading={loginMutationResults.isLoading} text="Sign In" />
         </form>

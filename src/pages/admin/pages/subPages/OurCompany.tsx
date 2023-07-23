@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IzyAdminApis } from "../../../../api/Query";
 import ReactQuill from "react-quill";
 import { modules } from "../../../../constants/pageDummyData";
@@ -36,6 +36,26 @@ const OurCompany = () => {
 
   const OurCompanyDetails = getPages?.data?.data?.page_data[7];
   const params2 = OurCompanyDetails?.id;
+
+  const OurCompanyData = OurCompanyDetails?.meta?.our_company;
+
+  useEffect(() => {
+    setFormFields({
+      ...formFields,
+      title: OurCompanyData?.title || "",
+      background_url: OurCompanyData?.background_url || "",
+      sub_title: OurCompanyData?.sub_data?.[0].title || "",
+      bg_image: OurCompanyData?.sub_data?.[0].bg_image || "",
+      sub_title2: OurCompanyData?.sub_data?.[1].title || "",
+      bg_image2: OurCompanyData?.sub_data?.[1].bg_image || "",
+      sub_title3: OurCompanyData?.sub_data?.[2].title || "",
+      bg_image3: OurCompanyData?.sub_data?.[2].bg_image || "",
+    });
+    setValue(OurCompanyData?.sub_data?.[0].content || "");
+    setValue2(OurCompanyData?.sub_data?.[1].content || "");
+    setValue3(OurCompanyData?.sub_data?.[2].content || "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [OurCompanyDetails]);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -84,9 +104,9 @@ const OurCompany = () => {
     { id: 3, props: "sub_title", value: sub_title, label: "sub title - Our story", quill: false },
     { id: 4, props: "content", value: value, label: "content - our story", quill: true, setState: setValue },
     { id: 5, props: "bg_image", value: bg_image, label: "sub image - our story", quill: false, img: true },
-    { id: 6, props: "sub_title2", value: sub_title2, label: "sub title - our partnership", quill: false },
-    { id: 7, props: "content2", value: value2, label: "content - our partnership", quill: true, setState: setValue2 },
-    { id: 8, props: "bg_image2", value: bg_image2, label: "sub image - our partnership", quill: false, img: true },
+    { id: 6, props: "sub_title2", value: sub_title2, label: "sub title - our family", quill: false },
+    { id: 7, props: "content2", value: value2, label: "content - our family", quill: true, setState: setValue2 },
+    { id: 8, props: "bg_image2", value: bg_image2, label: "sub image - our family", quill: false, img: true },
     { id: 9, props: "sub_title3", value: sub_title3, label: "sub title - our focus on safety", quill: false },
     { id: 10, props: "content3", value: value3, label: "content - our focus on safety", quill: true, setState: setValue3 },
     { id: 11, props: "bg_image3", value: bg_image3, label: "sub image - our focus on safety", quill: false, img: true },
