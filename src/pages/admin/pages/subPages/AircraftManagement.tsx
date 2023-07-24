@@ -25,6 +25,7 @@ const AircraftManagement = () => {
   const [limit, setLimit] = useState(10);
 
   const [value, setValue] = useState("");
+  const [value1, setValue1] = useState("");
   const [value2, setValue2] = useState("");
 
   const params = { page: page, limit: limit };
@@ -42,6 +43,7 @@ const AircraftManagement = () => {
     setFormFields({ ...formFields, title: AircraftData?.title || "", background_url: AircraftData?.background_url || "", aircaft_management_content: AircraftData?.aircaft_management_content || "", aircaft_management_content2: AircraftData?.aircaft_management_content2 || "", aircraft_maintenance_content: AircraftData?.aircraft_maintenance_content || "" });
 
     setValue(AircraftData?.line_maintenance_content || "");
+    setValue1(AircraftData?.aircraft_maintenance_content || "");
     setValue2(AircraftData?.base_maintenance_content || "");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [AircraftManagement]);
@@ -63,7 +65,7 @@ const AircraftManagement = () => {
               background_url: background_url,
               aircaft_management_content: aircaft_management_content,
               aircaft_management_content2: aircaft_management_content2,
-              aircraft_maintenance_content: aircraft_maintenance_content,
+              aircraft_maintenance_content: value1,
               base_maintenance_content: value2,
               line_maintenance_content: value,
             },
@@ -79,7 +81,7 @@ const AircraftManagement = () => {
     { id: 2, props: "background_url", value: background_url, label: "hero background", quill: false, img: true },
     { id: 2, props: "aircaft_management_content", value: aircaft_management_content, label: "aircraft content top", quill: false },
     { id: 2, props: "aircaft_management_content2", value: aircaft_management_content2, label: "aircraft content bottom", quill: false },
-    { id: 2, props: "aircraft_maintenance_content", value: aircraft_maintenance_content, label: "Aircraft maintenance content", quill: false },
+    { id: 2, props: "aircraft_maintenance_content", value: value1, label: "Aircraft maintenance content", quill: true, setState: setValue1 },
     { id: 2, props: "line_maintenance_content", value: value, label: "Line Maintenance Content", quill: true, setState: setValue },
     { id: 2, props: "base_maintenance_content", value: value2, label: "Base Maintenance Content", quill: true, setState: setValue2 },
   ];
