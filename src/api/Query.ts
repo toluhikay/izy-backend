@@ -3,6 +3,7 @@ import { RootState } from "../store/store";
 import { AdminEndpoints } from "../constants/ApiEndPoints";
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { logOutAdmin } from "../features/adminSlice";
+import { url } from "inspector";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_BASE_URL,
@@ -76,7 +77,23 @@ export const IzyAdminApis = createApi({
       }),
       invalidatesTags: ["Blog"],
     }),
-
+    updateBlog: builder.mutation({
+      query: ({ params, body }) => ({
+        url: AdminEndpoints.ADD_BLOG,
+        method: "PUT",
+        body,
+        params,
+      }),
+      invalidatesTags: ["Blog"],
+    }),
+    getSingleBlog: builder.query({
+      query: (params) => ({
+        url: AdminEndpoints.ADD_BLOG,
+        method: "GET",
+        params,
+      }),
+      providesTags: ["Blog"],
+    }),
     // media endpoints
     uploadMedia: builder.mutation({
       query: (body) => ({

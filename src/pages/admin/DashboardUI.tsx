@@ -7,6 +7,7 @@ import Media from "../media/Media";
 import DashboardLanding from "./pages/subPages/DashboardLanding";
 import AccountSetting from "./accountSetting/AccountSetting";
 import Subscribers from "./subscribers/Subscribers";
+import EditBlog from "./blogs/EditBlog";
 
 const DashboardUI = () => {
   return (
@@ -20,6 +21,7 @@ const DashboardUI = () => {
           <Route path="media" element={<Media />} />
           <Route path="subscribers-news" element={<Subscribers />} />
           <Route path="account-setting" element={<AccountSetting />} />
+          <Route path="blog/:reference" element={<EditBlog />} />
         </Routes>
       </div>
     </div>

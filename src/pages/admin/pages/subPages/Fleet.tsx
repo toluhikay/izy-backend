@@ -168,6 +168,7 @@ const OurCompany = () => {
                   ) : item.img ? (
                     <div>
                       <input className="border w-full p-2 mt-3" type="text" value={item.value} name={item.props} id={item.props} onChange={handleChange} />
+                      <p className="mt-6 font-medium text-primary-1">Click on any Image below to Select New Image</p>
                       <div className="flex py-3 flex-wrap items-center">
                         {ImageList?.map((itemImg: any, indexImg: number) => {
                           return (
@@ -200,18 +201,21 @@ const OurCompany = () => {
           <br />
           <div className="flex items-center justify-start w-full">
             <input type="text" name="" value={singleImage} className="border w-[70%] mr-2 p-2" onChange={(e) => setSingleImage(e.target.value)} />
-            <button
-              className="bg-amber-700 py-2 px-3 text-white rounded"
-              type="button"
-              onClick={() => {
-                if (singleImage) {
-                  setGallery([...gallery, singleImage]);
-                  setSingleImage("");
-                }
-              }}
-            >
-              Add Image
-            </button>
+            {singleImage ? (
+              <button
+                className="bg-amber-700 py-2 px-3 text-white rounded"
+                type="button"
+                onClick={() => {
+                  if (singleImage) {
+                    setGallery([...gallery, singleImage]);
+                    toast.success("Image Added to Gallery");
+                    setSingleImage("");
+                  }
+                }}
+              >
+                Add Image
+              </button>
+            ) : null}
           </div>
           <div className="mb-6">
             <p className="text-amber-700 mt-6">Bombardier Gallery Pictures</p>

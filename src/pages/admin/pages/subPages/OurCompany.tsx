@@ -130,6 +130,7 @@ const OurCompany = () => {
                   ) : item.img ? (
                     <div>
                       <input className="border w-full p-2 mt-3" type="text" value={item.value} name={item.props} id={item.props} onChange={handleChange} />
+                      <p className="mt-6 font-medium text-primary-1">Click on any Image below to Select New Image</p>
                       <div className="flex py-3 flex-wrap items-center">
                         {ImageList?.map((itemImg: any, indexImg: number) => {
                           return (

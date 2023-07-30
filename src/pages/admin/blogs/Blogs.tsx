@@ -5,6 +5,8 @@ import { IzyAdminApis } from "../../../api/Query";
 import PaginationComponent from "../../../components/PaginationComponent";
 import DeleteBlogModal from "../../../modals/DeleteBlogModal";
 import LoaderComponent from "../../../common/LoaderComponent";
+import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 export const portals: any = document.getElementById("portals");
 
@@ -17,6 +19,7 @@ const Blogs = () => {
   const params = { page: page, limit: limit };
   const getBlogs = IzyAdminApis.useGetBlogsQuery(params);
   const getBlogList = getBlogs?.data?.data?.page_data;
+  const navigate = useNavigate();
 
   const TableHeadData = ["user", "status", "plan", "date created", "action"];
 
@@ -37,21 +40,31 @@ const Blogs = () => {
         <div className="px-[89px] py-20 flex flex-wrap justify-between">
           {getBlogList?.map((item: any, index: number) => {
             return (
-              <div className="lg:w-[32%] md:w-[48%] w-full min-h-[200px] p-3 flex flex-col items-center justify-center text-center border border-primary-1 mb-6" key={index}>
+              <div className="lg:w-[32%] w-full min-h-[200px] p-3 flex flex-col items-center justify-center text-center border border-primary-1 mb-6" key={index}>
                 <div className="w-full">
-                  <img className="w-full rounded border border-primary-1" src={item?.media || "https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxvZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60"} alt="" />
+                  <img className="w-full h-[300px] object-cover rounded border border-primary-1" src={item?.media || "https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmxvZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60"} alt="" />
                   <div>
                     <div className="py-3 text-primary-1 font-medium" dangerouslySetInnerHTML={{ __html: item.title }} />
-                    <button
-                      className="bg-red-600 rounded text-white py-2 w-full"
-                      onClick={() => {
-                        setDeleteOpen(true);
-                        setId(item.reference);
-                      }}
-                    >
-                      Delete Blog
-                    </button>
-                    <p className="py-1">Posted On: {item.created_at}</p>
+                    <div>
+                      <button
+                        className="py-2 border border-primary-1 w-fit mr-2 rounded px-5"
+                        onClick={() => {
+                          navigate("/dashboard/blog/" + item.reference, { state: { item } });
+                        }}
+                      >
+                        Edit Blog
+                      </button>
+                      <button
+                        className="bg-primary-1 rounded text-white py-2 w-fit px-5"
+                        onClick={() => {
+                          setDeleteOpen(true);
+                          setId(item.reference);
+                        }}
+                      >
+                        Delete Blog
+                      </button>
+                    </div>
+                    <p className="py-1">Posted On: {moment(item.created_at).format("ll")}</p>
                   </div>
                 </div>
               </div>
