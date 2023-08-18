@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IzyAdminApis } from "../../../../api/Query";
 import ReactQuill from "react-quill";
 import { modules } from "../../../../constants/pageDummyData";
@@ -27,6 +27,12 @@ const Privacy = () => {
   const params2 = Privacy?.id;
 
   const [value, setValue] = useState("");
+  const [value2, setValue2] = useState("");
+
+  useEffect(() => {
+    setValue(Privacy?.meta?.privacy?.content);
+    setValue2(Privacy?.meta?.privacy?.content_terms_of_carraige);
+  }, [Privacy]);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -43,6 +49,7 @@ const Privacy = () => {
             privacy: {
               title: title,
               content: value,
+              content_terms_of_carraige: value2,
             },
           },
         },
@@ -54,6 +61,7 @@ const Privacy = () => {
   const FormData = [
     { id: 1, props: "title", value: title, label: "title", quill: false },
     { id: 2, props: "content", value: value, label: "privacy content", quill: true, setState: setValue, img: false },
+    { id: 2, props: "content_terms_of_carraige", value: value2, label: "terms of carriage", quill: true, setState: setValue2, img: false },
   ];
 
   return (

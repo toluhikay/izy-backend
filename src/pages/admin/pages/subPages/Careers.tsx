@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IzyAdminApis } from "../../../../api/Query";
 import ReactQuill from "react-quill";
 import { modules } from "../../../../constants/pageDummyData";
 import ButtonLoader from "../../../../common/ButtonLoader";
+import { toast } from "react-hot-toast";
 
 const defaultFormFields = {
   background_url: "",
   job_opportunities_content: "",
   qualification: "",
   resume_email: "",
-  title: "High class, delivered to you",
+  title: "",
   work_conditions: "",
 };
 
@@ -38,6 +39,14 @@ const Careers = () => {
     setFormFields({ ...formFields, [name]: value });
   };
 
+  useEffect(() => {
+    setFormFields({ ...formFields, title: Career?.meta?.careers?.title || "", background_url: Career?.meta?.careers?.background_url || "", resume_email: Career?.meta?.careers?.resume_email });
+    setValue(Career?.meta?.careers?.job_opportunities_content || "");
+    setValue2(Career?.meta?.careers?.qualification || "");
+    setValue3(Career?.meta?.careers?.work_conditions || "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [Career]);
+
   const HandlePageUpdate = async (e: any) => {
     e.preventDefault();
     try {
@@ -56,7 +65,10 @@ const Careers = () => {
           },
         },
       });
-    } catch (error) {}
+      toast.success("Career Page Updated Successfully");
+    } catch (error: any) {
+      toast.error(error?.message);
+    }
   };
 
   const FormData = [

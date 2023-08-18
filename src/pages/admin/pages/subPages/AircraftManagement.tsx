@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast";
 const defaultFormFields = {
   title: "",
   background_url: "",
+  background_url2: "",
   aircaft_management_content: "",
   aircaft_management_content2: "",
   aircraft_maintenance_content: "",
@@ -19,7 +20,7 @@ const AircraftManagement = () => {
   const getImages = IzyAdminApis.useGetImagesListQuery({});
   const ImageList = getImages?.data?.data;
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { title, background_url, aircaft_management_content, aircaft_management_content2, aircraft_maintenance_content } = formFields;
+  const { title, background_url, background_url2, aircaft_management_content, aircaft_management_content2, aircraft_maintenance_content } = formFields;
 
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
@@ -40,7 +41,15 @@ const AircraftManagement = () => {
   // console.log("data", AircraftData);
 
   useEffect(() => {
-    setFormFields({ ...formFields, title: AircraftData?.title || "", background_url: AircraftData?.background_url || "", aircaft_management_content: AircraftData?.aircaft_management_content || "", aircaft_management_content2: AircraftData?.aircaft_management_content2 || "", aircraft_maintenance_content: AircraftData?.aircraft_maintenance_content || "" });
+    setFormFields({
+      ...formFields,
+      title: AircraftData?.title || "",
+      background_url: AircraftData?.background_url || "",
+      background_url2: AircraftData?.background_url2 || "",
+      aircaft_management_content: AircraftData?.aircaft_management_content || "",
+      aircaft_management_content2: AircraftData?.aircaft_management_content2 || "",
+      aircraft_maintenance_content: AircraftData?.aircraft_maintenance_content || "",
+    });
 
     setValue(AircraftData?.line_maintenance_content || "");
     setValue1(AircraftData?.aircraft_maintenance_content || "");
@@ -63,6 +72,7 @@ const AircraftManagement = () => {
             aircraft_management: {
               title: title,
               background_url: background_url,
+              background_url2: background_url2,
               aircaft_management_content: aircaft_management_content,
               aircaft_management_content2: aircaft_management_content2,
               aircraft_maintenance_content: value1,
@@ -78,7 +88,8 @@ const AircraftManagement = () => {
 
   const FormData = [
     { id: 1, props: "title", value: title, label: "title", quill: false },
-    { id: 2, props: "background_url", value: background_url, label: "hero background", quill: false, img: true },
+    { id: 2, props: "background_url", value: background_url, label: "Aircraft management hero background", quill: false, img: true },
+    { id: 2, props: "background_url2", value: background_url2, label: "Aircraft Maintenance Hero Background", quill: false, img: true },
     { id: 2, props: "aircaft_management_content", value: aircaft_management_content, label: "aircraft content top", quill: false },
     { id: 2, props: "aircaft_management_content2", value: aircaft_management_content2, label: "aircraft content bottom", quill: false },
     { id: 2, props: "aircraft_maintenance_content", value: value1, label: "Aircraft maintenance content", quill: true, setState: setValue1 },
