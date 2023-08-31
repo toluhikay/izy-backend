@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import ModalWrapper from "../common/ModalWrapper";
 import ButtonLoader from "../common/ButtonLoader";
-import PersonPlaceHolder from "../assets/images/PersonPlaceholder.jpeg";
 import { IzyAdminApis } from "../api/Query";
 import toast from "react-hot-toast";
 
@@ -33,7 +32,7 @@ const UploadMedia = ({ setModalOpen }: { setModalOpen: React.Dispatch<React.SetS
               <img src={image} className="w-full h-full object-cover z-[10]" alt="" />
             </div>
             <label htmlFor="image" className=" text-primary-1 cursor-pointer pl-6">
-              Add New Picture
+              Choose a Picture
             </label>
             <input
               type="file"
@@ -56,7 +55,7 @@ const UploadMedia = ({ setModalOpen }: { setModalOpen: React.Dispatch<React.SetS
             Cancel
           </button>
           <button type="button" className="bg-primary-1 py-3 cursor-pointer border text-white rounded uppercase font-medium px-5" onClick={HandleImageUpload}>
-            {postMediaMutationResults.isLoading ? <ButtonLoader /> : "Add Photo"}
+            {postMediaMutationResults.isLoading ? <ButtonLoader /> : "Upload Photo"}
           </button>
         </div>
       </form>
